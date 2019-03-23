@@ -1,6 +1,12 @@
-import { Link } from "gatsby"
-import PropTypes from "prop-types"
-import React from "react"
+import { Link } from 'gatsby';
+import PropTypes from 'prop-types';
+import React from 'react';
+import Navigation from './navigation';
+import styled from 'styled-components';
+
+const StyledH1 = styled.h1`
+  margin-bottom: 1rem;
+`;
 
 const Header = ({ siteTitle }) => (
   <header
@@ -16,7 +22,7 @@ const Header = ({ siteTitle }) => (
         padding: `1.45rem 1.0875rem`,
       }}
     >
-      <h1 style={{ margin: 0 }}>
+      <StyledH1>
         <Link
           to="/"
           style={{
@@ -26,17 +32,20 @@ const Header = ({ siteTitle }) => (
         >
           {siteTitle}
         </Link>
-      </h1>
+      </StyledH1>
+      <nav>
+        <Navigation />
+      </nav>
     </div>
   </header>
-)
+);
 
 Header.propTypes = {
   siteTitle: PropTypes.string,
-}
+};
 
 Header.defaultProps = {
   siteTitle: ``,
-}
+};
 
-export default Header
+export default Header;

@@ -1,5 +1,4 @@
-import firebase from "firebase/app"
-import "firebase/database"
+import "firebase/database";
 
 const config = {
   apiKey: process.env.GATSBY_FIREBASE_API_KEY,
@@ -8,16 +7,16 @@ const config = {
   projectId: process.env.GATSBY_FIREBASE_PROJECT_ID,
   storageBucket: process.env.GATSBY_FIREBASE_STORAGE_BUCKET,
   messagingSenderId: process.env.GATSBY_FIREBASE_MESSAGING_SENDER_ID,
-}
+};
 
-let firebaseInstance
+let firebaseInstance;
 export const getFirebase = firebase => {
   if (firebaseInstance) {
-    return firebaseInstance
+    return firebaseInstance;
   }
 
-  firebase.initializeApp(config)
-  firebaseInstance = firebase
+  firebase.initializeApp(config);
+  firebaseInstance = firebase;
 
-  return firebase
-}
+  return firebase;
+};
