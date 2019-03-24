@@ -35,6 +35,9 @@ const Navigation = () => (
       <StyledNavLink to={ROUTES.HOME}>Home</StyledNavLink>
     </ListItem>
     <ListItem>
+      <StyledNavLink to={ROUTES.SIGN_UP}>Sign Up</StyledNavLink>
+    </ListItem>
+    <ListItem>
       <StyledNavLink to={ROUTES.SIGN_IN}>Sign In</StyledNavLink>
     </ListItem>
     <ListItem>

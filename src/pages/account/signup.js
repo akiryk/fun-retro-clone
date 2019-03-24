@@ -1,15 +1,105 @@
-import React, { Component } from "react";
-import Layout from "../../components/layout";
+import React, { Component, Fragment } from 'react';
+import Layout from '../../components/layout';
+import { Link } from 'gatsby';
+import * as ROUTES from '../../constants/routes';
+import { FirebaseContext } from '../../firebase/';
 
-class SignUp extends Component {
+const SignUpPage = () => (
+  <Layout>
+    <FirebaseContext.Consumer>
+      {firebase => <SignUpForm firebase={firebase} />}
+    </FirebaseContext.Consumer>
+  </Layout>
+);
+
+const INITIAL_STATE = {
+  username: '',
+  email: '',
+  passwordOne: '',
+  passwordTwo: '',
+  isAdmin: false,
+  error: null,
+};
+class SignUpForm extends Component {
+  state = {
+    ...INITIAL_STATE,
+  };
+
+  onSubmit = event => {
+    const { username, email, passwordOne } = this.state;
+
+    this.props.firebase
+      .doCreateUserWithEmailAndPassword(email, passwordOne)
+      .then(authUser => {
+        this.setState({ ...INITIAL_STATE });
+      })
+      .catch(error => {
+        this.setState({ error });
+      });
+
+    event.preventDefault();
+  };
+
+  onChange = event => {
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
+  };
+
   render() {
+    const { username, email, passwordOne, passwordTwo, error } = this.state;
+    const isInvalid =
+      passwordOne !== passwordTwo ||
+      passwordOne === '' ||
+      email === '' ||
+      username === '';
+
     return (
-      <Layout>
-        <h1>This is a signup page</h1>
-        <p>And here is a form...</p>
-      </Layout>
+      <form onSubmit={this.onSubmit}>
+        <input
+          name="username"
+          value={username}
+          onChange={this.onChange}
+          type="text"
+          placeholder="Full Name"
+        />
+        <input
+          name="email"
+          value={email}
+          onChange={this.onChange}
+          type="text"
+          placeholder="Email Address"
+        />
+        <input
+          name="passwordOne"
+          value={passwordOne}
+          onChange={this.onChange}
+          type="password"
+          placeholder="Password"
+        />
+        <input
+          name="passwordTwo"
+          value={passwordTwo}
+          onChange={this.onChange}
+          type="password"
+          placeholder="Confirm Password"
+        />
+        <button type="submit" disabled={isInvalid}>
+          Sign Up
+        </button>
+
+        {error && <p>{error.message}</p>}
+      </form>
     );
   }
 }
 
-export default SignUp;
+const SignUpLink = () => (
+  <p>
+    Don't have an account? <Link to={ROUTES.SIGN_UP}>Sign Up</Link>
+  </p>
+);
+
+export default SignUpPage;
+
+// export { SignUpLink };
