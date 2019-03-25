@@ -30,7 +30,24 @@ const StyledNavLink = styled(Link)`
   }
 `;
 
-const Navigation = () => (
+const Navigation = ({ authUser }) =>
+  authUser ? <NavigationAuth /> : <NavigationNoAuth />;
+
+const NavigationAuth = () => (
+  <NavWrapper>
+    <ListItem marginLeft="0">
+      <StyledNavLink to={ROUTES.HOME}>Home</StyledNavLink>
+    </ListItem>
+    <ListItem>
+      <StyledNavLink to={ROUTES.ACCOUNT}>Account</StyledNavLink>
+    </ListItem>
+    <ListItem>
+      <SignOutButton />
+    </ListItem>
+  </NavWrapper>
+);
+
+const NavigationNoAuth = () => (
   <NavWrapper>
     <ListItem marginLeft="0">
       <StyledNavLink to={ROUTES.HOME}>Home</StyledNavLink>
@@ -40,12 +57,6 @@ const Navigation = () => (
     </ListItem>
     <ListItem>
       <StyledNavLink to={ROUTES.SIGN_IN}>Sign In</StyledNavLink>
-    </ListItem>
-    <ListItem>
-      <StyledNavLink to={ROUTES.ACCOUNT}>Account</StyledNavLink>
-    </ListItem>
-    <ListItem>
-      <SignOutButton />
     </ListItem>
   </NavWrapper>
 );

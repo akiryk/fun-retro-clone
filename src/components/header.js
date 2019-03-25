@@ -8,7 +8,7 @@ const StyledH1 = styled.h1`
   margin-bottom: 1rem;
 `;
 
-const Header = ({ siteTitle }) => (
+const Header = ({ siteTitle, authUser }) => (
   <header
     style={{
       background: `rebeccapurple`,
@@ -34,7 +34,7 @@ const Header = ({ siteTitle }) => (
         </Link>
       </StyledH1>
       <nav>
-        <Navigation />
+        <Navigation authUser={authUser} />
       </nav>
     </div>
   </header>
