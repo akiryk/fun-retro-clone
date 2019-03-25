@@ -1,15 +1,90 @@
-import React, { Component } from "react";
-import Layout from "../../components/layout";
+import React, { Component } from 'react';
+import { SignUpLink } from './signup';
+import { navigate } from 'gatsby';
+import Layout from '../../components/layout';
+import { StyledForm, Label, Input, FormField } from '../../styles';
+import { withFirebase } from '../../firebase/';
+import * as ROUTES from '../../constants/routes';
 
-class SignIn extends Component {
+const SignInPage = () => (
+  <Layout>
+    <h1>SignIn</h1>
+    <SignInForm />
+    <SignUpLink />
+  </Layout>
+);
+
+const INITIAL_STATE = {
+  email: '',
+  password: '',
+  error: null,
+};
+
+class SignInFormBase extends Component {
+  state = {
+    ...INITIAL_STATE,
+  };
+
+  onSubmit = event => {
+    const { email, password } = this.state;
+
+    this.props.firebase
+      .doSignInWithEmailAndPassword(email, password)
+      .then(authUser => {
+        this.setState({ ...INITIAL_STATE });
+        navigate(ROUTES.HOME);
+      })
+      .catch(error => {
+        this.setState({ error });
+      });
+
+    event.preventDefault();
+  };
+
+  onChange = event => {
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
+  };
+
   render() {
+    const { email, password, error } = this.state;
+    const isInvalid = password === '' || email === '';
+
     return (
-      <Layout>
-        <h1>This is a Sign In page</h1>
-        <p>And here is a form for signing in...</p>
-      </Layout>
+      <StyledForm onSubmit={this.onSubmit}>
+        <FormField>
+          <Label htmlFor="email">Email</Label>
+          <Input
+            name="email"
+            id="email"
+            value={email}
+            onChange={this.onChange}
+            type="email"
+            placeholder="Email Address"
+          />
+        </FormField>
+        <FormField>
+          <Label htmlFor="password">Password</Label>
+          <Input
+            id="password"
+            name="password"
+            value={password}
+            onChange={this.onChange}
+            type="password"
+            placeholder="Password"
+          />
+        </FormField>
+        <button type="submit" disabled={isInvalid}>
+          Sign Up
+        </button>
+
+        {error && <p>{error.message}</p>}
+      </StyledForm>
     );
   }
 }
 
-export default SignIn;
+const SignInForm = withFirebase(SignInFormBase);
+
+export default SignInPage;

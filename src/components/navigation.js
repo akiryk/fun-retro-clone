@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { Link } from 'gatsby';
 import * as ROUTES from '../constants/routes';
 import styled from 'styled-components';
+import SignOutButton from '../pages/account/signout';
 
 const NavWrapper = styled.ul`
   display: flex;
@@ -42,6 +43,9 @@ const Navigation = () => (
     </ListItem>
     <ListItem>
       <StyledNavLink to={ROUTES.ACCOUNT}>Account</StyledNavLink>
+    </ListItem>
+    <ListItem>
+      <SignOutButton />
     </ListItem>
   </NavWrapper>
 );

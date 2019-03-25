@@ -1,14 +1,13 @@
 import React, { Component, Fragment } from 'react';
 import Layout from '../../components/layout';
-import { Link } from 'gatsby';
+import { Link, navigate } from 'gatsby';
 import * as ROUTES from '../../constants/routes';
-import { FirebaseContext } from '../../firebase/';
+import { withFirebase } from '../../firebase/';
+import { StyledForm, Label, Input, FormField } from '../../styles';
 
 const SignUpPage = () => (
   <Layout>
-    <FirebaseContext.Consumer>
-      {firebase => <SignUpForm firebase={firebase} />}
-    </FirebaseContext.Consumer>
+    <SignUpForm />
   </Layout>
 );
 
@@ -20,7 +19,7 @@ const INITIAL_STATE = {
   isAdmin: false,
   error: null,
 };
-class SignUpForm extends Component {
+class SignUpFormBase extends Component {
   state = {
     ...INITIAL_STATE,
   };
@@ -32,6 +31,8 @@ class SignUpForm extends Component {
       .doCreateUserWithEmailAndPassword(email, passwordOne)
       .then(authUser => {
         this.setState({ ...INITIAL_STATE });
+        console.log('You Win!');
+        navigate(ROUTES.HOME);
       })
       .catch(error => {
         this.setState({ error });
@@ -55,41 +56,56 @@ class SignUpForm extends Component {
       username === '';
 
     return (
-      <form onSubmit={this.onSubmit}>
-        <input
-          name="username"
-          value={username}
-          onChange={this.onChange}
-          type="text"
-          placeholder="Full Name"
-        />
-        <input
-          name="email"
-          value={email}
-          onChange={this.onChange}
-          type="text"
-          placeholder="Email Address"
-        />
-        <input
-          name="passwordOne"
-          value={passwordOne}
-          onChange={this.onChange}
-          type="password"
-          placeholder="Password"
-        />
-        <input
-          name="passwordTwo"
-          value={passwordTwo}
-          onChange={this.onChange}
-          type="password"
-          placeholder="Confirm Password"
-        />
+      <StyledForm onSubmit={this.onSubmit}>
+        <FormField>
+          <Label htmlFor="username">Full Name</Label>
+          <Input
+            name="username"
+            value={username}
+            onChange={this.onChange}
+            type="text"
+            id="username"
+          />
+        </FormField>
+        <FormField>
+          <Label htmlFor="email">Email</Label>
+          <Input
+            name="email"
+            id="email"
+            value={email}
+            onChange={this.onChange}
+            type="email"
+            placeholder="Email Address"
+          />
+        </FormField>
+        <FormField>
+          <Label htmlFor="passwordOne">Password</Label>
+          <Input
+            id="passwordOne"
+            name="passwordOne"
+            value={passwordOne}
+            onChange={this.onChange}
+            type="password"
+            placeholder="Password"
+          />
+        </FormField>
+        <FormField>
+          <Label htmlFor="passwordTwo">Password (again)</Label>
+          <Input
+            id="passwordTwo"
+            name="passwordTwo"
+            value={passwordTwo}
+            onChange={this.onChange}
+            type="password"
+            placeholder="Confirm Password"
+          />
+        </FormField>
         <button type="submit" disabled={isInvalid}>
           Sign Up
         </button>
 
         {error && <p>{error.message}</p>}
-      </form>
+      </StyledForm>
     );
   }
 }
@@ -100,6 +116,8 @@ const SignUpLink = () => (
   </p>
 );
 
+const SignUpForm = withFirebase(SignUpFormBase);
+
 export default SignUpPage;
 
-// export { SignUpLink };
+export { SignUpForm, SignUpLink };
