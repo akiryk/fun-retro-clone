@@ -1,5 +1,5 @@
 import React from 'react';
-import getFirebase, { withFirebase } from '../../firebase';
+import withFirebase from '../firebase/with_firebase';
 import AuthUserContext from './context';
 
 const withAuthentication = Component => {
@@ -9,7 +9,8 @@ const withAuthentication = Component => {
     };
 
     componentDidMount() {
-      this.listener = getFirebase().auth.onAuthStateChanged(authUser => {
+      console.log('at authentication: ', this.props.firebase);
+      this.listener = this.props.firebase.auth.onAuthStateChanged(authUser => {
         authUser
           ? this.setState({ authUser })
           : this.setState({ authUser: null });

@@ -5,13 +5,15 @@
  * See: https://www.gatsbyjs.org/docs/static-query/
  */
 
-import React, { Component } from 'react';
-import getFirebase, { FirebaseContext } from '../firebase';
+import React from 'react';
+import getFirebase from './firebase/firebase';
+import FirebaseContext from './firebase/context';
 import { StaticQuery, graphql } from 'gatsby';
 import withAuthentication from './session/with_authentication';
-
+import styled from 'styled-components';
+import { Normalize } from 'styled-normalize';
 import Header from './header';
-import './layout.css';
+import '../styles/root.css';
 
 const Layout = ({ children }) => (
   <StaticQuery
@@ -26,31 +28,21 @@ const Layout = ({ children }) => (
     `}
     render={data => (
       <>
+        <Normalize />
         <Header siteTitle={data.site.siteMetadata.title} />
-        <div
-          style={{
-            margin: `0 auto`,
-            maxWidth: 960,
-            padding: `0px 1.0875rem 1.45rem`,
-            paddingTop: 0,
-          }}
-        >
-          <main>{children}</main>
-          <footer>
-            © {new Date().getFullYear()}, Built with
-            {` `}
-            <a href="https://www.gatsbyjs.org">Gatsby</a>
-          </footer>
-        </div>
+        <main>{children}</main>
+        <footer>© {new Date().getFullYear()}, Love & Attention</footer>
       </>
     )}
   />
 );
 
+const AuthLayout = withAuthentication(Layout);
+
 const App = ({ children }) => (
   <FirebaseContext.Provider value={getFirebase()}>
-    <Layout>{children}</Layout>
+    <AuthLayout>{children}</AuthLayout>
   </FirebaseContext.Provider>
 );
 
-export default withAuthentication(App);
+export default App;

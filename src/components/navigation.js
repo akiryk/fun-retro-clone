@@ -17,16 +17,16 @@ const ListItem = styled.li`
 `;
 
 const StyledNavLink = styled(Link)`
-  color: #fff;
+  color: #333;
   text-decoration: none;
   font-family: 'Open Sans', sans-serif;
   display: block;
   border: 1px solid white;
   border-radius: 6px;
   padding: 5px 20px;
-
+  background-color: rgba(0, 0, 0, 0.06);
   :hover {
-    background-color: rgba(255, 255, 255, 0.06);
+    background-color: rgba(0, 0, 0, 0.1);
     box-shadow: 0 16px 10px -12px rgba(0, 0, 0, 0.5);
   }
 `;
@@ -35,11 +35,13 @@ const StyledNavLink = styled(Link)`
 //   authUser ? <NavigationAuth /> : <NavigationNoAuth />;
 const Navigation = () => (
   <AuthUserContext.Consumer>
-    {authUser => (authUser ? <NavigationAuth /> : <NavigationNoAuth />)}
+    {authUser =>
+      authUser ? <NavigationAuth user={authUser} /> : <NavigationNoAuth />
+    }
   </AuthUserContext.Consumer>
 );
 
-const NavigationAuth = () => (
+const NavigationAuth = ({ user }) => (
   <NavWrapper>
     <ListItem marginLeft="0">
       <StyledNavLink to={ROUTES.HOME}>Home</StyledNavLink>
@@ -63,6 +65,9 @@ const NavigationNoAuth = () => (
     </ListItem>
     <ListItem>
       <StyledNavLink to={ROUTES.SIGN_IN}>Sign In</StyledNavLink>
+    </ListItem>
+    <ListItem>
+      <StyledNavLink to={ROUTES.ACCOUNT}>Account</StyledNavLink>
     </ListItem>
   </NavWrapper>
 );

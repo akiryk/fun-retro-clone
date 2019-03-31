@@ -3,7 +3,8 @@ import { SignUpLink } from './signup';
 import { navigate } from 'gatsby';
 import Layout from '../../components/layout';
 import { StyledForm, Label, Input, FormField } from '../../styles';
-import { withFirebase } from '../../firebase/';
+import withFirebase from '../../components/firebase/with_firebase';
+import { Link } from 'gatsby';
 import * as ROUTES from '../../constants/routes';
 
 const SignInPage = () => (
@@ -11,6 +12,7 @@ const SignInPage = () => (
     <h1>SignIn</h1>
     <SignInForm />
     <SignUpLink />
+    <Link to={ROUTES.PASSWORD_FORGET}>Forgot Password?</Link>
   </Layout>
 );
 

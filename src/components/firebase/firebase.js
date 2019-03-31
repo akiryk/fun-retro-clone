@@ -34,9 +34,9 @@ class Firebase {
 
 let firebase;
 
-function getFirebase(app, auth, database) {
+function getFirebase() {
   if (!firebase) {
-    firebase = new Firebase(app, auth, database);
+    firebase = new Firebase();
   }
 
   return firebase;

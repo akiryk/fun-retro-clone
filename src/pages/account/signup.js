@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import Layout from '../../components/layout';
 import { Link, navigate } from 'gatsby';
 import * as ROUTES from '../../constants/routes';
-import { withFirebase } from '../../firebase/';
+import withFirebase from '../../components/firebase/with_firebase';
 import { StyledForm, Label, Input, FormField } from '../../styles';
 
 const SignUpPage = () => (
@@ -12,7 +12,7 @@ const SignUpPage = () => (
 );
 
 const INITIAL_STATE = {
-  username: '',
+  displayName: '',
   email: '',
   passwordOne: '',
   passwordTwo: '',
@@ -25,13 +25,12 @@ class SignUpFormBase extends Component {
   };
 
   onSubmit = event => {
-    const { username, email, passwordOne } = this.state;
+    const { displayName, email, passwordOne } = this.state;
 
     this.props.firebase
       .doCreateUserWithEmailAndPassword(email, passwordOne)
       .then(authUser => {
         this.setState({ ...INITIAL_STATE });
-        console.log('You Win!');
         navigate(ROUTES.HOME);
       })
       .catch(error => {
