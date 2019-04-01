@@ -2,7 +2,7 @@ import React from 'react';
 import Layout from '../../components/layout';
 import PasswordResetForm from '../../components/account/password_change';
 import PasswordForgetForm from '../../components/account/password_forget';
-import withAuthorization from '../../components/session/with_authorization';
+import withAuthorizationConsumer from '../../components/session/with_authorization_consumer';
 
 const AccountPageContentBase = () => (
   <>
@@ -13,7 +13,7 @@ const AccountPageContentBase = () => (
 );
 
 const condition = authUser => !!authUser;
-const AccountPageWithAuth = withAuthorization(condition)(
+const AccountPageWithAuth = withAuthorizationConsumer(condition)(
   AccountPageContentBase
 );
 

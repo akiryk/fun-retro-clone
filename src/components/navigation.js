@@ -3,7 +3,8 @@ import { Link } from 'gatsby';
 import * as ROUTES from '../constants/routes';
 import styled from 'styled-components';
 import SignOutButton from '../pages/account/signout';
-import AuthUserContext from './session/context';
+// import AuthUserContext from './session/context';
+import SessionContext from '../context/session_context';
 
 const NavWrapper = styled.ul`
   display: flex;
@@ -34,11 +35,11 @@ const StyledNavLink = styled(Link)`
 // const Navigation = ({ authUser }) =>
 //   authUser ? <NavigationAuth /> : <NavigationNoAuth />;
 const Navigation = () => (
-  <AuthUserContext.Consumer>
+  <SessionContext.Consumer>
     {authUser =>
       authUser ? <NavigationAuth user={authUser} /> : <NavigationNoAuth />
     }
-  </AuthUserContext.Consumer>
+  </SessionContext.Consumer>
 );
 
 const NavigationAuth = ({ user }) => (
@@ -51,6 +52,9 @@ const NavigationAuth = ({ user }) => (
     </ListItem>
     <ListItem>
       <SignOutButton />
+    </ListItem>
+    <ListItem>
+      <StyledNavLink to={ROUTES.ADMIN}>Admin</StyledNavLink>
     </ListItem>
   </NavWrapper>
 );

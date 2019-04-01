@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withFirebase } from '../firebase';
+import { withFirebaseConsumer } from '../firebase/index';
 
 const INITIAL_STATE = {
   email: '',
@@ -54,6 +54,6 @@ class PasswordForgetFormBase extends Component {
   }
 }
 
-const PasswordForgetForm = withFirebase(PasswordForgetFormBase);
+const PasswordForgetForm = withFirebaseConsumer(PasswordForgetFormBase);
 
 export default PasswordForgetForm;

@@ -3,7 +3,7 @@ import { SignUpLink } from './signup';
 import { navigate } from 'gatsby';
 import Layout from '../../components/layout';
 import { StyledForm, Label, Input, FormField } from '../../styles';
-import withFirebase from '../../components/firebase/with_firebase';
+import withFirebase from '../../components/firebase/with_firebase_consumer';
 import { Link } from 'gatsby';
 import * as ROUTES from '../../constants/routes';
 

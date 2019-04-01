@@ -1,3 +1,3 @@
-import withFirebase from './with_firebase';
+import withFirebaseConsumer from './with_firebase_consumer';
 
-export { withFirebase };
+export { withFirebaseConsumer };

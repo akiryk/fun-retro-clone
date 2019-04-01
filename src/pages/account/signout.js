@@ -1,5 +1,5 @@
 import React from 'react';
-import withFirebase from '../../components/firebase/with_firebase';
+import withFirebaseConsumer from '../../components/firebase/with_firebase_consumer';
 import { navigate } from 'gatsby';
 import * as ROUTES from '../../constants/routes';
 import styled from 'styled-components';
@@ -33,4 +33,4 @@ const SignOutButton = ({ firebase }) => {
   );
 };
 
-export default withFirebase(SignOutButton);
+export default withFirebaseConsumer(SignOutButton);

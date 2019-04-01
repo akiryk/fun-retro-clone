@@ -2,7 +2,8 @@ import React, { Component, Fragment } from 'react';
 import Layout from '../../components/layout';
 import { Link, navigate } from 'gatsby';
 import * as ROUTES from '../../constants/routes';
-import withFirebase from '../../components/firebase/with_firebase';
+import * as ROLES from '../../constants/roles';
+import withFirebase from '../../components/firebase/with_firebase_consumer';
 import { StyledForm, Label, Input, FormField } from '../../styles';
 
 const SignUpPage = () => (
@@ -12,7 +13,7 @@ const SignUpPage = () => (
 );
 
 const INITIAL_STATE = {
-  displayName: '',
+  username: '',
   email: '',
   passwordOne: '',
   passwordTwo: '',
@@ -25,11 +26,24 @@ class SignUpFormBase extends Component {
   };
 
   onSubmit = event => {
-    const { displayName, email, passwordOne } = this.state;
+    const { username, email, passwordOne, isAdmin } = this.state;
+    const roles = [];
+
+    if (isAdmin) {
+      roles.push(ROLES.ADMIN);
+    }
 
     this.props.firebase
       .doCreateUserWithEmailAndPassword(email, passwordOne)
       .then(authUser => {
+        // Create a user in Firebase database
+        return this.props.firebase.user(authUser.user.uid).set({
+          username,
+          email,
+          roles,
+        });
+      })
+      .then(() => {
         this.setState({ ...INITIAL_STATE });
         navigate(ROUTES.HOME);
       })
@@ -46,8 +60,19 @@ class SignUpFormBase extends Component {
     });
   };
 
+  onChangeCheckbox = event => {
+    this.setState({ [event.target.name]: event.target.checked });
+  };
+
   render() {
-    const { username, email, passwordOne, passwordTwo, error } = this.state;
+    const {
+      username,
+      email,
+      passwordOne,
+      passwordTwo,
+      error,
+      isAdmin,
+    } = this.state;
     const isInvalid =
       passwordOne !== passwordTwo ||
       passwordOne === '' ||
@@ -99,10 +124,17 @@ class SignUpFormBase extends Component {
             placeholder="Confirm Password"
           />
         </FormField>
+        <label htmlFor="isAdmin">Admin:</label>
+        <input
+          id="isAdmin"
+          name="isAdmin"
+          type="checkbox"
+          checked={isAdmin}
+          onChange={this.onChangeCheckbox}
+        />
         <button type="submit" disabled={isInvalid}>
           Sign Up
         </button>
-
         {error && <p>{error.message}</p>}
       </StyledForm>
     );

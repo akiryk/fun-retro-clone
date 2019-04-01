@@ -6,11 +6,9 @@
  */
 
 import React from 'react';
-import getFirebase from './firebase/firebase';
-import FirebaseContext from './firebase/context';
 import { StaticQuery, graphql } from 'gatsby';
-import withAuthentication from './session/with_authentication';
-import styled from 'styled-components';
+// import withAuthenticationProvider from './session/with_authentication_provider';
+import { withSessionProvider } from '../context/session_context';
 import { Normalize } from 'styled-normalize';
 import Header from './header';
 import '../styles/root.css';
@@ -37,12 +35,4 @@ const Layout = ({ children }) => (
   />
 );
 
-const AuthLayout = withAuthentication(Layout);
-
-const App = ({ children }) => (
-  <FirebaseContext.Provider value={getFirebase()}>
-    <AuthLayout>{children}</AuthLayout>
-  </FirebaseContext.Provider>
-);
-
-export default App;
+export default withSessionProvider(Layout);
