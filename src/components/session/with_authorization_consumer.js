@@ -10,15 +10,6 @@ const withAuthorizationConsumer = condition => Component => {
     componentDidMount() {
       this.listener = this.props.firebase.onAuthUserListener(
         authUser => {
-          console.log('authUser ', authUser);
-          console.log(condition);
-          if (authUser) {
-            console.log('yes, an authorized user');
-          }
-          console.log(authUser.roles);
-          if (authUser.roles.includes('ADMIN')) {
-            console.log('sure, it contains it');
-          }
           if (!condition(authUser)) {
             navigate(ROUTES.SIGN_IN);
           }
@@ -31,9 +22,7 @@ const withAuthorizationConsumer = condition => Component => {
       return (
         <SessionContext.Consumer>
           {authUser =>
-            console.log('auth user', authUser) || condition(authUser) ? (
-              <Component {...this.props} />
-            ) : null
+            condition(authUser) ? <Component {...this.props} /> : null
           }
         </SessionContext.Consumer>
       );
