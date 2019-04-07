@@ -14,3 +14,6 @@ The session provider needs to have access to Firebase, so it's wrapped in a Fire
 
 ## Roles and Authorization
 Roles are handled right now only in Admin. TBD: better organize code so it makes more sense. There is an awkward nesting of components so that Admin has access to the right context data for users.
+
+## Sources
+* [Unicorn Agency Polling App Tutorial](https://medium.com/@UnicornAgency/jamstack-pwa-lets-build-a-polling-app-with-gatsby-js-firebase-and-styled-components-pt-2-9044534ea6bc)
