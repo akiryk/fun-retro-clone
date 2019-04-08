@@ -56,9 +56,6 @@ const NavigationAuth = ({ user }) => (
     <ListItem>
       <StyledNavLink to={ROUTES.ADMIN}>Admin</StyledNavLink>
     </ListItem>
-    <ListItem>
-      <StyledNavLink to={ROUTES.STORIES}>Stories</StyledNavLink>
-    </ListItem>
   </NavWrapper>
 );
 

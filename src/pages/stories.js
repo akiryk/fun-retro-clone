@@ -1,5 +1,6 @@
 // import React from 'react';
-// import { getFirebase } from '../firebase';
+// import { getFirebase } from '../components/firebase';
+// import Layout from '../components/layout';
 
 // class Stories extends React.Component {
 //   componentDidMount() {
@@ -24,7 +25,11 @@
 //   }
 
 //   render() {
-//     return <h1>Hello Stories</h1>;
+//     return (
+//       <Layout>
+//         <h1>Hello stories</h1>
+//       </Layout>
+//     );
 //   }
 // }
 
