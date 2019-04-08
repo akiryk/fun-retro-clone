@@ -1,8 +1,8 @@
 import React from 'react';
-import Layout from '../../components/layout';
 import PasswordResetForm from '../../components/account/password_change';
 import PasswordForgetForm from '../../components/account/password_forget';
 import withAuthorizationConsumer from '../../components/session/with_authorization_consumer';
+import withLayout from '../../components/layouts';
 
 const AccountPageContentBase = () => (
   <>
@@ -12,18 +12,9 @@ const AccountPageContentBase = () => (
   </>
 );
 
-const condition = authUser => !!authUser;
-const AccountPageWithAuth = withAuthorizationConsumer(condition)(
+const getIsUserAuthorized = authUser => !!authUser;
+const AccountPage = withAuthorizationConsumer(getIsUserAuthorized)(
   AccountPageContentBase
 );
 
-/**
- * AccountPageWithAuth must go inside of Layout, since Layout is what includes the Provider
- */
-const AccountPage = () => (
-  <Layout>
-    <AccountPageWithAuth />
-  </Layout>
-);
-
-export default AccountPage;
+export default withLayout(AccountPage);

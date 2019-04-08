@@ -26,7 +26,7 @@ module.exports = {
     },
     {
       resolve: `gatsby-plugin-create-client-paths`,
-      options: { prefixes: [`/admin/*`] },
+      options: { prefixes: [`/stories/*`, `/admin/*`] },
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,

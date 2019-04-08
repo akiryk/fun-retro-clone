@@ -42,7 +42,7 @@ const Navigation = () => (
   </SessionContext.Consumer>
 );
 
-const NavigationAuth = ({ user }) => (
+const NavigationAuth = () => (
   <NavWrapper>
     <ListItem marginLeft="0">
       <StyledNavLink to={ROUTES.HOME}>Home</StyledNavLink>

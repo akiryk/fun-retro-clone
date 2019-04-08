@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Layout from '../../components/layout';
+import withLayout from '../../components/layouts';
 import withAuthorizationConsumer from '../../components/session/with_authorization_consumer';
 import * as ROLES from '../../constants/roles';
 import * as ROUTES from '../../constants/routes';
@@ -58,13 +58,4 @@ class AdminPageBase extends Component {
 const condition = authUser => authUser && authUser.roles.includes(ROLES.ADMIN);
 const AdminPageWithAuth = withAuthorizationConsumer(condition)(AdminPageBase);
 
-/**
- * AdminPageWithAuth must go inside of Layout, since Layout is what includes the Provider
- */
-const AdminPage = () => (
-  <Layout>
-    <AdminPageWithAuth />
-  </Layout>
-);
-
-export default AdminPage;
+export default withLayout(AdminPageWithAuth);

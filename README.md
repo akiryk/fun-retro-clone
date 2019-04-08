@@ -28,6 +28,6 @@ npm install gatsby-plugin-create-client-paths
 // Then update gatsby-config
 {
   resolve: `gatsby-plugin-create-client-paths`,
-  options: { prefixes: [`/admin/*`] },
+  options: { prefixes: [`/admin/*`, `/stories/*`] },
 },
 ```

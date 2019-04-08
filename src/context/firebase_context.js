@@ -2,6 +2,7 @@ import React from 'react';
 import app from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
+import 'firebase/firestore';
 
 const FirebaseContext = React.createContext(null);
 
@@ -20,6 +21,7 @@ class Firebase {
     /* Firebase APIs */
     this.auth = app.auth();
     this.db = app.database();
+    this.firestore = app.firestore();
   }
 
   // *** Merge Auth and DB User API *** //
@@ -75,6 +77,11 @@ class Firebase {
   user = uid => this.db.ref(`users/${uid}`);
 
   users = () => this.db.ref('users');
+
+  // *** Stories API ***
+  stories = () => this.firestore.collection('stories');
+
+  story = id => this.firestore.doc(`stories/${id}`);
 }
 
 let firebase;
