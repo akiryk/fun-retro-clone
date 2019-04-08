@@ -5,14 +5,14 @@ const SessionContext = React.createContext(null);
 
 const withSessionProvider = Component => {
   class WithSessionProvider extends React.Component {
-    constructor(props) {
-      super(props);
-      this.state = {
-        authUser: JSON.parse(localStorage.getItem('authUser')),
-      };
-    }
+    state = {
+      authUser: null,
+    };
 
     componentDidMount() {
+      this.setState({
+        authUser: JSON.parse(localStorage.getItem('authUser')),
+      });
       this.listener = this.props.firebase.onAuthUserListener(
         authUser => {
           localStorage.setItem('authUser', JSON.stringify(authUser));

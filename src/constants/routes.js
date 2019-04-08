@@ -7,3 +7,4 @@ export const PASSWORD_FORGET = '/account/password_forget';
 export const PASSWORD_CHANGE = '/account/password_change';
 export const ADMIN = '/admin';
 export const ADMIN_DETAILS = '/admin/:id';
+export const STORIES = '/stories';
