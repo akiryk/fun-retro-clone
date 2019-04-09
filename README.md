@@ -32,3 +32,7 @@ npm install gatsby-plugin-create-client-paths
   options: { prefixes: [`/admin/*`, `/stories/*`] },
 },
 ```
+
+## Netlify
+To make a gatsby site work on Netlify, you may need to create a netlify.toml file with the command set to "gatsby build" (it may not be required if the netlify settings defaults just work). You also need to copy over all key variables in Netlify Settings > Build & Deploy > Continuous Deployment > Build Environment Variables.
+These variables should be the same as you have in .env.development and should match the naming, as in `GATSBY_API_KEY` (or, in my case `GATSBY_FIREBASE_API_KEY`) -- the point is they must match between wherever the app uses them and the Netlify build vars.
