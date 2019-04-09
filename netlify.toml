@@ -1,0 +1,4 @@
+[build]
+base = "stories-with-firebase/"
+publish = "stories-with-firebase/build/"
+command = "npm run build"

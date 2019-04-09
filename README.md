@@ -17,6 +17,7 @@ Roles are handled right now only in Admin. TBD: better organize code so it makes
 
 ## Sources
 * [Unicorn Agency Polling App Tutorial](https://medium.com/@UnicornAgency/jamstack-pwa-lets-build-a-polling-app-with-gatsby-js-firebase-and-styled-components-pt-2-9044534ea6bc )
+* [Deploy Gatsby/Firebase to Netlify](https://www.dajocarter.com/posts/upload-firebase-storage-gatsby-netlify/)
 
 ## Plugins
 Gatsby does not support dynamically generated pages, meaning you can't have routes like `/users/:someId`. In order to accomplish this we need to add a plugin that will have Gatsby skip generating the markup for a specified route, effectively making that route’s page component behave like a single page application.
