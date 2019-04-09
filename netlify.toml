@@ -1,4 +1,4 @@
 [build]
 base = "stories-with-firebase/"
-publish = "stories-with-firebase/build/"
+publish = "public/"
 command = "gatsby build"
