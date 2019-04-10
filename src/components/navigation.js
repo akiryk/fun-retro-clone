@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Link } from 'gatsby';
 import * as ROUTES from '../constants/routes';
 import styled from 'styled-components';
@@ -58,6 +58,9 @@ const NavigationAuth = () => (
     </ListItem>
     <ListItem>
       <StyledNavLink to={ROUTES.STORIES}>Stories</StyledNavLink>
+    </ListItem>
+    <ListItem>
+      <StyledNavLink to={ROUTES.RETRO}>Retros</StyledNavLink>
     </ListItem>
   </NavWrapper>
 );

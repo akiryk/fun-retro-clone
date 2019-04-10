@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import Layout from '../../components/layout';
 import { Link, navigate } from 'gatsby';
 import * as ROUTES from '../../constants/routes';

@@ -9,3 +9,5 @@ export const STORIES = '/stories';
 export const STORY = '/stories/:id';
 export const ADMIN = '/admin';
 export const ADMIN_DETAILS = '/admin/:id';
+export const RETRO = '/retro';
+export const RETRO_PAGE = '/retro/:id';

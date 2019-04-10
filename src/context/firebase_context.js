@@ -82,6 +82,10 @@ class Firebase {
   stories = () => this.firestore.collection('stories');
 
   story = id => this.firestore.doc(`stories/${id}`);
+
+  retroBoardsList = () => this.firestore.collection('retroBoards');
+  getRetroBoards = () => this.retroBoardsList().get();
+  retroBoard = id => this.firestore.doc(`retroBoards/${id}`);
 }
 
 let firebase;
