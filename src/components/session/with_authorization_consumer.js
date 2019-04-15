@@ -5,27 +5,42 @@ import withFirebaseConsumer from '../firebase/with_firebase_consumer';
 import SessionContext from '../../context/session_context';
 import * as ROUTES from '../../constants/routes';
 
+const getLocalState = itemName => {
+  if (typeof window !== 'undefined') {
+    return JSON.parse(localStorage.getItem(itemName));
+  }
+  return null;
+};
+
+const setLocalState = (itemName, item) => {
+  if (typeof window !== 'undefined') {
+    localStorage.setItem(itemName, JSON.stringify(item));
+  }
+};
+
+const removeFromLocalState = itemName => {
+  if (typeof window !== 'undefined') {
+    localStorage.removeItem(itemName);
+  }
+};
+
 const withAuthorizationConsumer = condition => Component => {
   class WithAuthorizationConsumer extends React.Component {
     state = {
-      authUser: JSON.parse(localStorage.getItem('authUser')),
+      authUser: getLocalState('authUser'),
     };
 
     componentDidMount() {
       this.listener = this.props.firebase.onAuthUserListener(
         authUser => {
-          if (typeof window !== 'undefined') {
-            localStorage.setItem('authUser', JSON.stringify(authUser));
-          }
+          setLocalState('authUser', authUser);
           this.setState({ authUser });
           if (!condition(authUser)) {
             navigate(ROUTES.SIGN_IN);
           }
         },
         () => {
-          if (typeof window !== 'undefined') {
-            localStorage.removeItem('authUser');
-          }
+          removeFromLocalState('authUser');
           this.setState({ authUser: null });
           navigate(ROUTES.SIGN_IN);
         }
