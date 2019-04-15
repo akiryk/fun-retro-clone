@@ -7,14 +7,28 @@ import * as ROUTES from '../../constants/routes';
 
 const withAuthorizationConsumer = condition => Component => {
   class WithAuthorizationConsumer extends React.Component {
+    state = {
+      authUser: JSON.parse(localStorage.getItem('authUser')),
+    };
+
     componentDidMount() {
       this.listener = this.props.firebase.onAuthUserListener(
         authUser => {
+          if (typeof window !== 'undefined') {
+            localStorage.setItem('authUser', JSON.stringify(authUser));
+          }
+          this.setState({ authUser });
           if (!condition(authUser)) {
             navigate(ROUTES.SIGN_IN);
           }
         },
-        () => navigate(ROUTES.SIGN_IN)
+        () => {
+          if (typeof window !== 'undefined') {
+            localStorage.removeItem('authUser');
+          }
+          this.setState({ authUser: null });
+          navigate(ROUTES.SIGN_IN);
+        }
       );
     }
 

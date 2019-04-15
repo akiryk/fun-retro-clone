@@ -25,7 +25,7 @@ const RetroPage = () => {
   );
 };
 
-const condition = authUser => true;
+const condition = authUser => !!authUser;
 const RetroPageWithAuth = withAuthorizationConsumer(condition)(RetroPage);
 
 export default withLayout(withFirebaseConsumer(RetroPageWithAuth));
