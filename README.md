@@ -1,5 +1,9 @@
 # Gatsby and Firebase
 
+## Todos
+* Use Helmet to include page titles
+* Change rules so only auth users can read/write
+
 ## Firebase Authentication
 
 ### Authentication
@@ -36,3 +40,24 @@ npm install gatsby-plugin-create-client-paths
 ## Netlify
 To make a gatsby site work on Netlify, you may need to create a netlify.toml file with the command set to "gatsby build" (it may not be required if the netlify settings defaults just work). You also need to copy over all key variables in Netlify Settings > Build & Deploy > Continuous Deployment > Build Environment Variables.
 These variables should be the same as you have in .env.development and should match the naming, as in `GATSBY_API_KEY` (or, in my case `GATSBY_FIREBASE_API_KEY`) -- the point is they must match between wherever the app uses them and the Netlify build vars.
+
+## Firestore
+### Example of saving a record to Firestore
+```
+// See set() vs add()
+firebase.firestore
+    .collection('retroBoards')
+    .add({
+      title,
+    })
+    .then(docRef => {
+      if (docRef && docRef.id) {
+        navigate(`${ROUTES.RETRO}/${docRef.id}`);
+      } else {
+        throw new Error('No document reference ID');
+      }
+    })
+    .catch(function(error) {
+      console.error('Error writing document: ', error);
+    });
+  ```

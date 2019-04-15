@@ -4,21 +4,25 @@ import * as ROUTES from '../../constants/routes';
 import withFirebaseConsumer from '../../components/firebase/with_firebase_consumer';
 
 const handleSubmit = (firebase, title) => {
-  firebase.firestore
-    .collection('retroBoards')
-    .add({
-      title,
-    })
-    .then(docRef => {
-      if (docRef && docRef.id) {
-        navigate(`${ROUTES.RETRO}/${docRef.id}`);
-      } else {
-        throw new Error('No document reference ID');
+  const newKey = firebase.db
+    .ref()
+    .child('retroBoards')
+    .push().key;
+
+  firebase.db
+    .ref()
+    .child(`/retroBoards/${newKey}`)
+    .set(
+      {
+        title,
+        column0: 'Happy',
+        column1: 'Meh',
+        column2: 'Sad',
+      },
+      () => {
+        navigate(`${ROUTES.RETRO}/${newKey}`);
       }
-    })
-    .catch(function(error) {
-      console.error('Error writing document: ', error);
-    });
+    );
 };
 
 const CreateRetroBoard = ({ firebase }) => {

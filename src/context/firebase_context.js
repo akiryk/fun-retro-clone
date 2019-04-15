@@ -32,8 +32,9 @@ class Firebase {
           .once('value')
           .then(snapshot => {
             const dbUser = snapshot.val();
+            console.log(authUser.uid);
             // default empty roles
-            if (!dbUser.roles) {
+            if (dbUser && !dbUser.roles) {
               dbUser.roles = [];
             }
 
@@ -80,12 +81,18 @@ class Firebase {
 
   // *** Stories API ***
   stories = () => this.firestore.collection('stories');
-
   story = id => this.firestore.doc(`stories/${id}`);
 
-  retroBoardsList = () => this.firestore.collection('retroBoards');
-  getRetroBoards = () => this.retroBoardsList().get();
-  retroBoard = id => this.firestore.doc(`retroBoards/${id}`);
+  // *** Retro Board API ***
+  // *** Firestore ***
+  // retroBoardsList = () => this.firestore.collection('retroBoards');
+  retroBoardsList = () => this.db.ref('retroBoards');
+  // getRetroBoards = () => this.retroBoardsList().get();
+  retroBoard = id => this.db.ref(`retroBoards/${id}`);
+
+  // *** Real time Database ***
+  comment = id => this.db.ref(`comments/${id}`);
+  comments = () => this.db.ref('comments');
 }
 
 let firebase;

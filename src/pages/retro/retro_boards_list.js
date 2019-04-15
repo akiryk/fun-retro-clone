@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'gatsby';
 import withFirebaseConsumer from '../../components/firebase/with_firebase_consumer';
 import * as ROUTES from '../../constants/routes';
@@ -9,29 +9,37 @@ const getBoardsList = board => (
   </li>
 );
 
-const RetroBoardsList = ({ firebase }) => {
-  const [boardsData, setBoardsData] = useState([]);
+class RetroBoardsList extends React.Component {
+  state = {
+    boards: [],
+  };
 
-  useEffect(() => {
-    firebase.getRetroBoards().then(querySnapshot => {
-      const boards = querySnapshot.docs.map(doc => ({
-        id: doc.id,
-        title: doc.data().title,
+  componentDidMount() {
+    const retroBoardRef = this.props.firebase.db.ref('retroBoards');
+    retroBoardRef.on('value', snapshot => {
+      const boardsObject = snapshot.val();
+      const boardsList = Object.keys(boardsObject).map(key => ({
+        ...boardsObject[key],
+        id: key,
       }));
-      setBoardsData(boards);
-    });
-  }, []);
 
-  return (
-    <>
-      <h3>A List of Boards</h3>
-      {boardsData.length > 0 ? (
-        <ul>{boardsData.map(getBoardsList)}</ul>
-      ) : (
-        <p>Wait.</p>
-      )}
-    </>
-  );
-};
+      this.setState({ boards: boardsList });
+    });
+  }
+
+  render() {
+    const { boards } = this.state;
+    return (
+      <>
+        <h3>A List of Boards</h3>
+        {boards.length > 0 ? (
+          <ul>{boards.map(getBoardsList)}</ul>
+        ) : (
+          <p>Wait.</p>
+        )}
+      </>
+    );
+  }
+}
 
 export default withFirebaseConsumer(RetroBoardsList);

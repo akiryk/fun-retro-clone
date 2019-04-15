@@ -22,6 +22,7 @@
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
     "react-helmet": "^5.2.0",
+    "react-onclickoutside": "^6.8.0",
     "styled-components": "^4.2.0",
     "styled-normalize": "^8.0.6"
   },
