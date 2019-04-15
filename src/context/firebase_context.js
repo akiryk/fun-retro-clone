@@ -93,6 +93,7 @@ class Firebase {
   // *** Real time Database ***
   comment = id => this.db.ref(`comments/${id}`);
   comments = () => this.db.ref('comments');
+  commentsPerBoard = id => this.db.ref(`commentsPerBoard/${id}`);
 }
 
 let firebase;

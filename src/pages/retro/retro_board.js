@@ -28,9 +28,8 @@ const RetroBoard = props => {
   }, []);
 
   // Fetch comments for this board
-  const commentsRef = firebase.db.ref(`commentsPerBoard/${boardId}`);
   useEffect(() => {
-    commentsRef.on('value', snapshot => {
+    firebase.commentsPerBoard(boardId).on('value', snapshot => {
       const comments = snapshot.val();
       // we have an object with goods, sads, and mehs.
       // make it into three arrays of those things
