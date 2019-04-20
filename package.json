@@ -27,7 +27,12 @@
     "styled-normalize": "^8.0.6"
   },
   "devDependencies": {
-    "prettier": "^1.16.4"
+    "cypress": "^3.2.0",
+    "cypress-testing-library": "^2.4.0",
+    "jest-dom": "^3.1.3",
+    "prettier": "^1.16.4",
+    "react-testing-library": "^6.1.2",
+    "start-server-and-test": "^1.7.13"
   },
   "keywords": [
     "gatsby"
@@ -39,6 +44,8 @@
     "format": "prettier --write src/**/*.{js,jsx}",
     "start": "npm run develop",
     "serve": "gatsby serve",
+    "cy:open": "cypress open",
+    "test:e2e": "start-server-and-test develop http://localhost:8000 cy:open",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\""
   },
   "repository": {
