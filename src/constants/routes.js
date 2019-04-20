@@ -11,3 +11,4 @@ export const ADMIN = '/admin';
 export const ADMIN_DETAILS = '/admin/:id';
 export const RETRO = '/retro';
 export const RETRO_PAGE = '/retro/:id';
+export const EDIT_RETRO = '/settings/';

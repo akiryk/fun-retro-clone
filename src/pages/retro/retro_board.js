@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import RetroBoardColumn from './retro_board_column';
+import RetroBoardColumn from '../../components/retro_boards/retro_board_column';
 import PropTypes from 'prop-types';
 import withFirebaseConsumer from '../../components/firebase/with_firebase_consumer';
 
@@ -38,7 +38,8 @@ const RetroBoard = props => {
       columnKeys.forEach(key => {
         const columnComments = Object.keys(comments[key]).reduce(
           (allComments, commentId) => {
-            allComments.push(comments[key][commentId]);
+            const comment = { ...comments[key][commentId], id: commentId };
+            allComments.push(comment);
             return allComments;
           },
           []

@@ -4,7 +4,7 @@ import withFirebaseConsumer from '../../components/firebase/with_firebase_consum
 import withAuthorizationConsumer from '../../components/session/with_authorization_consumer';
 import * as ROUTES from '../../constants/routes';
 import { Match } from '@reach/router';
-import RetroBoardsList from './retro_boards_list';
+import RetroBoardsList from '../../components/retro_boards/retro_boards_list';
 import RetroBoard from './retro_board';
 import CreateRetroBoard from './create_retro_board';
 

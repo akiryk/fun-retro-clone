@@ -51,9 +51,6 @@ const NavigationAuth = () => (
       <StyledNavLink to={ROUTES.ACCOUNT}>Account</StyledNavLink>
     </ListItem>
     <ListItem>
-      <SignOutButton />
-    </ListItem>
-    <ListItem>
       <StyledNavLink to={ROUTES.ADMIN}>Admin</StyledNavLink>
     </ListItem>
     <ListItem>
@@ -61,6 +58,9 @@ const NavigationAuth = () => (
     </ListItem>
     <ListItem>
       <StyledNavLink to={ROUTES.RETRO}>Retros</StyledNavLink>
+    </ListItem>
+    <ListItem>
+      <SignOutButton />
     </ListItem>
   </NavWrapper>
 );
