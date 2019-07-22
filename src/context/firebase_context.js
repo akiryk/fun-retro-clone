@@ -32,7 +32,6 @@ class Firebase {
           .once('value')
           .then(snapshot => {
             const dbUser = snapshot.val();
-            console.log(authUser.uid);
             // default empty roles
             if (dbUser && !dbUser.roles) {
               dbUser.roles = [];
@@ -91,8 +90,6 @@ class Firebase {
   retroBoard = id => this.db.ref(`retroBoards/${id}`);
 
   // *** Real time Database ***
-  comment = id => this.db.ref(`comments/${id}`);
-  comments = () => this.db.ref('comments');
   commentsPerBoard = id => this.db.ref(`commentsPerBoard/${id}`);
 }
 

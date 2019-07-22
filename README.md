@@ -1,5 +1,10 @@
 # Gatsby and Firebase
 
+## Get Started
+* Clone the repo, `git@github.com:akiryk/fun-retro-clone.git`
+* Use node version 11.6 (e.g. switch with nvm, `nvm use 11.6`)
+* Run with `gatsby develop`
+
 ## Todos
 * Use Helmet to include page titles
 * Change rules so only auth users can read/write

@@ -7,13 +7,16 @@ import { Match } from '@reach/router';
 import RetroBoardsList from '../../components/retro_boards/retro_boards_list';
 import RetroBoard from './retro_board';
 import CreateRetroBoard from './create_retro_board';
+import CounterProvider from '../../components/counter/counter_provider';
 
-const RetroPage = () => {
+const RetroPage = ({ uid }) => {
   return (
     <Match path={ROUTES.RETRO_PAGE}>
       {props =>
         props.match ? (
-          <RetroBoard {...props.match} />
+          <CounterProvider {...props.match} uid={uid}>
+            <RetroBoard {...props.match} />
+          </CounterProvider>
         ) : (
           <>
             <RetroBoardsList />

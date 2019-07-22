@@ -51,7 +51,9 @@ const withAuthorizationConsumer = condition => Component => {
       return (
         <SessionContext.Consumer>
           {authUser =>
-            condition(authUser) ? <Component {...this.props} /> : null
+            condition(authUser) ? (
+              <Component uid={authUser.uid} {...this.props} />
+            ) : null
           }
         </SessionContext.Consumer>
       );
