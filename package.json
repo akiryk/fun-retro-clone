@@ -7,7 +7,7 @@
   "dependencies": {
     "core-js": "^2.6.5",
     "firebase": "^5.8.6",
-    "gatsby": "^2.1.30",
+    "gatsby": "^4.25.7",
     "gatsby-image": "^2.0.32",
     "gatsby-plugin-create-client-paths": "^2.0.5",
     "gatsby-plugin-manifest": "^2.0.23",
